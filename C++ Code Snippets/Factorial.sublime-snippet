@@ -1,0 +1,21 @@
+<snippet>
+	<content><![CDATA[
+#define lim int(1e5+5)
+ll fact[lim],inv[lim],pow2[lim];
+void init(){
+    fact[0] = 1;
+    f(i,1,lim)fact[i]=fact[i-1]*i%MOD;
+    inv[lim-1]=fmpow(fact[lim-1],MOD-2);
+    fb(i,lim-2,0)inv[i]=inv[i+1]*(i+1)%MOD;
+    f(i,0,lim)pow2[i]=fmpow2(i);
+}
+ll C(int n,int r){
+    if(r>n)return 0;
+    return fact[n]*inv[r]%MOD*inv[n-r]%MOD;
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>fact</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

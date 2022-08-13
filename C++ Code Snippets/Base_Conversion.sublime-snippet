@@ -1,0 +1,36 @@
+<snippet>
+	<content><![CDATA[
+vii split(ll x,int b=10){
+    vii r;
+    while(x)r.pb(x%b),x/=b;
+    reverse(all(r));
+    return r;
+}
+ll fuse(vii x,int b=10){
+    int n=0;
+    fv(i,x)n*=b,n+=i;
+    return n;
+}
+vii base(vii x,int b1,int b2=10){
+    ll n=fuse(x,b1);
+    return split(n,b2);;
+}
+ll zor(ll a,ll b,ll k){
+    vii ak=base(split(a),10,k),bk=base(split(b),10,k);
+    int n=sz(ak),m=sz(bk);
+    reverse(all(ak));
+    reverse(all(bk));
+    ak.resize(max(n,m));
+    bk.resize(max(n,m));
+    vii z;
+    f(i,0,max(n,m))z.pb((ak[i]-bk[i]+k)%k);
+    reverse(all(z));
+    z=base(z,k,10);
+    return fuse(z);
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>base</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

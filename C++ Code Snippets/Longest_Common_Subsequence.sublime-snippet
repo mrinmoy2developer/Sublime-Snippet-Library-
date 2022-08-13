@@ -1,0 +1,23 @@
+<snippet>
+	<content><![CDATA[
+string lcs(string X,string Y){
+    int n=sz(X),m=sz(Y),L[m+1][n+1],i=m,j=n;;
+    f(i,0,m+1)f(j,0,n+1){
+        if(i==0||j==0)L[i][j]=0;
+        else if(X[i-1]==Y[j-1])L[i][j] = L[i-1][j-1] + 1;
+        else L[i][j]=max(L[i-1][j],L[i][j-1]);
+    }
+    string lcs;
+    while(i>0&&j>0)
+      if (X[i-1]==Y[j-1])lcs.pb(X[i-1]),i--,j--;
+      else if(L[i-1][j]>L[i][j-1])i--;
+      else j--;
+    reverse(all(lcs));
+    return lcs;
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>lcs</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

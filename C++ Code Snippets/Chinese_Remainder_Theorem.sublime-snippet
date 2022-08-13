@@ -1,0 +1,22 @@
+<snippet>
+	<content><![CDATA[
+ll mod(ll a,ll b){return ((a%b)+b)%b; }
+pll crt(ll a1,ll m1,ll a2,ll m2){
+    ll s,t,g=egcd(m1,m2,s,t);
+    if(a1%g!=a2% g)return pll(0,-1);
+    s=mod(s*a2,m2);t=mod(t*a1,m1);
+    ll r=mod(s*(m1/g)+t*(m2/g),m1/g*m2),M=m1/g*m2;
+    return pll(r,M);
+}
+pll crt(const vll&a,const vll&m){
+    if(sz(a)==1)return pll(a[0],m[0]);
+    pll r=crt(a[0],m[0],a[1],m[1]);
+    f(i,2,sz(a))r=crt(r.ff,r.ss,a[i],m[i]);
+    return r;
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>CRT</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

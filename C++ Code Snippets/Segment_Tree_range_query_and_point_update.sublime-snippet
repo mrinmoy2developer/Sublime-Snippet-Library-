@@ -1,0 +1,59 @@
+<snippet>
+	<content><![CDATA[
+template<class T,class Arr=vv<T>,class Node=Node<T>>
+struct STree{
+    // public:
+    ll N;
+    vv<Node>tree;
+    Arr A;
+    STree(int n=0){
+        N=n;
+        if(N)rez(tree,2*N-1);
+    }
+    STree(Arr a){
+        A=a;
+        N=sz(a);
+        rez(tree,2*N-1);
+        build(0,0,N-1);
+    }
+    void build(int i,int l,int r){
+        if(l==r){tree[i]=Node(A[l]);return;}
+        int m=(l+r)>>1,lf=i+1,rt=i+((m-l+1)<<1);
+        build(lf,l,m);
+        build(rt,m+1,r);
+        tree[i]=tree[lf]+tree[rt];
+    }
+    void upd(int k,T x){
+        update(0,0,N-1,k,x);
+    }
+    void update(int i,int l,int r,int k,T x){
+        if(l==r){tree[i]=Node(x);return;}
+        int m=(l+r)>>1,lf=i+1,rt=i+((m-l+1)<<1);
+        if(k<=m)update(lf,l,m,k,x);
+        else update(rt,m+1,r,k,x);
+        tree[i]=tree[lf]+tree[rt];
+    }
+    Node q(int s,int e){
+        if(s<=e)return query(0,0,N-1,s,e);
+        return query(0,0,N-1,s,N-1)+query(0,0,N-1,0,e);
+    }
+    Node query(int i,int l,int r,int s,int e){
+        if(s>e)return Node();
+        int m=(l+r)>>1,lf=i+1,rt=i+((m-l+1)<<1);
+        if(s==l&&e==r)return tree[i];
+        else if(e<=m)return query(lf,l,m,s,e);
+        else if(s>m)return query(rt,m+1,r,s,e);
+        else return query(lf,l,m,s,m)+query(rt,m+1,r,m+1,e);
+    }
+    STree operator+(const STree &Y)const{
+        STree X(N);
+        f(i,0,sz(tree))X.tree[i]=tree[i]+Y.tree[i];
+        return X;
+    }
+};
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>Seg_Tree</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

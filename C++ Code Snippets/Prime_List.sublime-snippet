@@ -1,0 +1,17 @@
+<snippet>
+	<content><![CDATA[
+#define L int(1e5+5)
+vll p;
+void init(){
+    vv<bool>isp(L+1,1);
+    f(i,2,L)if(isp[i]){
+            p.pb(i);
+            for(ll j=i*i;j<=L-1;j+=i)isp[j]=0;
+        }
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>primes</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

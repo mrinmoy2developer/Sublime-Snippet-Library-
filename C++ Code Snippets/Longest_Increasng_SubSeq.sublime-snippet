@@ -1,0 +1,24 @@
+<snippet>
+	<content><![CDATA[
+template<class T>
+vv<T> lis(vv<T> const& a){
+    int n=sz(a),r=0;
+    vv<T>s;
+    // const int INF = 1e9;
+    vii d(n+1,INF),p(n+1,-1),q(n+1,-1);
+    d[0]=-INF;
+    f(i,1,n){
+        int j=upper_bound(d.begin(),d.end(),a[i])-d.begin();
+        if(d[j-1]<a[i]&&a[i]<d[j])d[j]=a[i],q[j]=i,p[i]=q[j-1];
+    }
+    fb(i,n,0)if(d[i]<INF){r=q[i];break;}
+    while(r!=-1)s.pb(a[r]),r=p[r];
+    reverse(all(s));
+    return s;
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>lis</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

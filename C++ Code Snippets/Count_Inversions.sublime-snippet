@@ -1,0 +1,15 @@
+<snippet>
+	<content><![CDATA[
+template<class T>
+ll invc(vv<T>a){
+    multiset<T>s;
+    ll n=sz(a),c=0;
+    fv(i,a)s.in(i),c+=distance(s.upper_bound(i),s.end());
+    return c;
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>inversions</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

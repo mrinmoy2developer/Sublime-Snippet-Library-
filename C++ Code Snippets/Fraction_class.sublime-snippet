@@ -1,0 +1,48 @@
+<snippet>
+	<content><![CDATA[
+struct Frac{
+    ll p,q;
+    Frac(ll a,ll b):p(q),q(b){
+        ll g=__gcd(a,b);
+        p=a/g;
+        q=b/g;
+    }
+    Frac(pll y):Frac(y.ff,y.ss){}
+    Frac():Frac(0,1){}
+    Frac(ll x):Frac(x,1){}
+    Frac operator+(Frac &x){return Frac(p*x.q+q*x.p,q*x.q);}
+    Frac operator-(Frac &x){return Frac(p*x.q-q*x.p,q*x.q);}
+    Frac operator+(ll c){return Frac(p+c*q,q);}
+    Frac operator-(ll c){return Frac(p-c*q,q);}
+    Frac operator*(Frac &x){return Frac(p*x.p,q*x.q);}
+    Frac operator/(Frac &x){return Frac(p*x.q,q*x.p);}
+    Frac operator*(ll c){return Frac(p*c,q);}
+    Frac operator/(ll c){return Frac(p,q*c);}
+    bool operator<(Frac &x){return p*x.q<x.p*q;}
+    bool operator>(Frac &x){return p*x.q>x.p*q;}
+    bool operator<=(Frac &x){return p*x.q<=x.p*q;}
+    bool operator>=(Frac &x){return p*x.q>=x.p*q;}
+    bool operator==(Frac &x){return p*x.q==x.p*q;}
+    friend Frac abs(Frac x){return Frac(x.p>0?x.p:-x.p,x.q>0?x.q:-x.q);}
+    friend ld eval(Frac x){return ld(x.p)/ld(x.q);} 
+    friend Frac pow(Frac x,ll e){
+        if(e>=0)return Frac(fpow(x.p,e),fpow(x.q,e));
+        return Frac(fpow(x.q,-e),fpow(x.p,-e));
+    }
+    friend Frac lcm(Frac x,Frac y){return Frac(lcm(x.p,y.p),gcd(x.q,y.q));}
+    friend Frac gcd(Frac x,Frac y){return Frac(gcd(x.p,y.p),lcm(x.q,y.q));}
+    friend ostream& operator<<(ostream& out,Frac x){
+        out<<"("<<x.p<<"/"<<x.q<<")";
+        return out;
+    }
+    friend istream& operator>>(istream& in,Frac&x){
+        cin>>x.p>>x.q;
+        return in;
+    }
+};
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>Frac</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

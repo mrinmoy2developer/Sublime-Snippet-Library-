@@ -1,0 +1,51 @@
+<snippet>
+	<content><![CDATA[
+ll n,x;
+vvll a;
+vv<bool> vst;
+vll w;
+void init(){
+    rez(a,n);
+    rez(w,n);
+    rez(vst,n);
+}
+void dfs(ll p){
+    vst[p]=1;
+    w[p]=1;
+    fv(i,a[p]){
+        if(!vst[i]){dfs(i);vst[i]=0;}
+    }
+    sort(all(a[p]),[](ll c1,ll c2){return w[c1]>w[c2];});
+    ll j=1;
+    fv(i,a[p])if(!vst[i]){
+            w[p]+=j*w[i];
+            vst[i]=1;
+            j++;
+        }
+}
+void show(){
+    f(i,0,n){
+        cout<<i+1<<":";
+        fv(j,a[i])cout<<j+1<<" ";
+        cout<<ln;
+    }
+}
+void solve(){
+    cin>>n;
+    init();
+    f(i,0,n-1){
+        ll u,v;
+        cin>>u>>v;
+        u--,v--;
+        a[u].pb(v);
+        a[v].pb(u);
+    }
+    dfs(0);
+    show();
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>dfs</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

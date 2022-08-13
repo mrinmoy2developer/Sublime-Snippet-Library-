@@ -1,0 +1,38 @@
+<snippet>
+	<content><![CDATA[
+		
+ll lpf[(int)1e6+2],d[(int)1e6+2],dp[ll(1e6+5)];
+void init(){
+    f(i,2,1e6+1)lpf[i]=-1;
+    f(i,2,1e6+1){
+        if(lpf[i]!=-1)continue;
+        ll j=i;
+        while(j<=1e6+1){
+            if(lpf[j]==-1)lpf[j]=i;
+            j+=i;
+        }
+    }
+    d[1]=1;
+    f(i,2,1e6+1){
+        d[i]=1;
+        int j=i,e=0;
+        ll p=lpf[j];
+        while(j>1){
+            if(lpf[j]!=p){
+                d[i]*=(e+1)%MOD;d[i]%=MOD;
+                p=lpf[j];
+                e=0;
+            }
+            e++;j/=p;
+        }
+        d[i]*=(e+1)%MOD;d[i]%=MOD;
+    }
+    dp[1]=1;
+    f(i,2,1e6+2)dp[i]=(d[i]-d[i-1]+2*dp[i-1])%MOD,dp[i]%=MOD;
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>seive</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

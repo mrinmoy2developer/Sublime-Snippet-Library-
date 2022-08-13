@@ -1,0 +1,97 @@
+<snippet>
+	<content><![CDATA[
+template<class T=ll,class Comp=less<T>>
+struct Sparse{
+    //public:
+    vv<vv<vv<vv<T>>>>rmq;
+    vv<vv<T>>_rmq;
+    int n,m,limx,limy;
+    vii p2,lg; 
+    function<T(T,T)>Foo=0;
+    Sparse(function<T(T,T)>foo=0){
+        Foo=foo;
+        n=m=0;
+    }
+    Sparse(vv<T>A,function<T(T,T)>foo=0){
+        Foo=foo;
+        n=sz(A);
+        lg.pb(-1);
+        f(i,1,n+2)lg.pb(lg[i/2]+1);
+        _rmq=vv<vv<T>>(lg[n]+1,A);
+        f(i,0,lg[n]+1)p2.pb(1<<i);
+        make();
+    }
+    Sparse(int N,function<T(T,T)>foo=0){
+        Foo=foo;
+        n=N;
+        lg.pb(-1);
+        f(i,1,n+2)lg.pb(lg[i/2]+1);
+        _rmq=vv<vv<T>>(lg[n]+1,vv<T>(n));
+        f(i,0,lg[n]+1)p2.pb(1<<i);
+        make();
+    }
+    Sparse(vv<vv<T>>M,function<T(T,T)>foo=0){
+        Foo=foo;
+        n=sz(M);
+        m=sz(M[0]);
+        lg.pb(-1);
+        f(i,1,max(n,m)+2)lg.pb(lg[i/2]+1);
+        rmq=vv<vv<vv<vv<T>>>>(lg[n]+1,vv<vv<vv<T>>>(lg[m]+1,M));
+        f(i,0,max(lg[n],lg[m])+1)p2.pb(1<<i);
+        make();
+    }
+    Sparse(int N,int M,function<T(T,T)>foo=0){
+        Foo=foo;
+        n=N;
+        m=M;
+        lg.pb(-1);
+        f(i,1,max(n,m)+2)lg.pb(lg[i/2]+1);
+        rmq=vv<vv<vv<vv<T>>>>(lg[n]+1,vv<vv<vv<T>>>(lg[m]+1,vv<vv<T>>(n,vv<T>(m))));
+        f(i,0,max(lg[n],lg[m])+1)p2.pb(1<<i);
+    }
+    T Q(T x,T y){
+        if(Foo)return Foo(x,y);
+        Comp c;
+        return c(x,y)?x:y;
+    }
+    int size(){return n;}
+    vv<T>& operator[](int i){
+        if(i<0&&i>=n){cout<<"Row index out of bdd error!";exit(0);}
+        return rmq[0][0][i];
+    }
+    T& operator()(int i){
+        if(i<0&&i>=n){cout<<"Row index out of bdd error!";exit(0);}
+        return _rmq[0][i];
+    }
+    void make(){
+        if(!rmq.empty()){
+            f(k,0,n)f(j,1,lg[m]+1)f(l,0,m-p2[j]+1)
+            rmq[0][j][k][l]=Q(rmq[0][j-1][k][l],rmq[0][j-1][k][l+p2[j-1]]);
+            f(i,1,lg[n]+1)f(k,0,n-p2[i]+1)f(l,0,m)
+            rmq[i][0][k][l]=Q(rmq[i-1][0][k][l],rmq[i-1][0][k+p2[i-1]][l]);
+            f(i,1,lg[n]+1)f(k,0,n-p2[i]+1)f(j,1,lg[m]+1)f(l,0,m-p2[j]+1)
+            rmq[i][j][k][l]=Q(Q(rmq[i-1][j-1][k][l],rmq[i-1][j-1][k][l+p2[j-1]]),
+            Q(rmq[i-1][j-1][k+p2[i-1]][l],rmq[i-1][j-1][k+p2[i-1]][l+p2[j-1]]));
+        }
+        else{
+            f(l,1,lg[n]+1)f(i,0,n-p2[l]+1)
+            _rmq[l][i]=Q(_rmq[l-1][i],_rmq[l-1][i+p2[l-1]]);
+        }
+    }
+    T operator()(int l,int r){
+        int L=lg[r-l+1]; 
+        return Q(_rmq[L][l],_rmq[L][r-p2[L]+1]);
+    }
+    T operator()(int i,int j,int a,int b){
+        int L1=i,L2=i+a-1,R1=j,R2=j+b-1,A=lg[a],B=lg[b],P2A=p2[lg[a]]-1,P2B=p2[lg[b]]-1;
+        T u=Q(rmq[A][B][L1][R1],rmq[A][B][L2-P2A][R1]);
+        T v=Q(rmq[A][B][L1][R2-P2B],rmq[A][B][L2-P2A][R2-P2B]);
+        return Q(u,v);
+    }
+};
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>Sparse</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

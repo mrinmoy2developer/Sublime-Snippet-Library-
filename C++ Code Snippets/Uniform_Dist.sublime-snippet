@@ -1,0 +1,17 @@
+<snippet>
+	<content><![CDATA[
+
+auto runif(ll n,ll a,ll b){
+    random_device rd; 
+    mt19937 gen(rd()); 
+    uniform_real_distribution<>dist(a,b);
+    vv<ld>p;
+    f(i,0,n)p.pb(dist(gen));
+    return p;
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>unif</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

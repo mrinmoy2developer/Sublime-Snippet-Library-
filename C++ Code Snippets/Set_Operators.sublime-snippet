@@ -1,0 +1,32 @@
+<snippet>
+	<content><![CDATA[
+template<class T>
+set<T> operator+(set<T>s1,set<T>s2){
+    set<T>si;
+    auto itr=set_union(all(s1),all(s2),inserter(si,si.begin()));
+    return si;
+}
+template<class T>
+set<T> operator*(set<T>s1,set<T>s2){
+    set<T>si;
+    auto itr=set_intersection(all(s1),all(s2),inserter(si,si.begin()));
+    return si;
+}
+template<class T>
+set<T> operator-(set<T>s1,set<T>s2){
+    set<T>si;
+    auto itr=set_difference(all(s1),all(s2),inserter(si,si.begin()));
+    return si;
+}
+template<class T>
+set<T> operator^(set<T>s1,set<T>s2){
+    set<T>si;
+    auto itr=set_summetric_difference(all(s1),all(s2),inserter(si,si.begin()));
+    return si;
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>set_operations</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

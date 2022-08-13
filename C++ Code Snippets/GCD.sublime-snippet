@@ -1,0 +1,22 @@
+<snippet>
+	<content><![CDATA[
+
+T gcd(T u,T v) {
+    T shift;
+    if(u==0)return v;
+    if(v==0)return u;
+    shift=czr(u|v);
+    u>>=czr(u);
+    do{
+        v>>=czr(v);
+        if(u > v)swap(u, v);
+        v-= u;
+    }while(v!=0);
+    return u<<shift;
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>gcd</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

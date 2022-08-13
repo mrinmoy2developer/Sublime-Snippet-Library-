@@ -1,0 +1,24 @@
+<snippet>
+	<content><![CDATA[
+struct hp1{
+    template<class T1,class T2>
+    size_t operator()(const pair<T1,T2>&p)const{
+        auto h1=hash<T1>{}(p.ff);
+        auto h2=hash<T2>{}(p.ss);
+        return h1^h2;
+    }
+};
+struct hp2{
+    template<class T1,class T2>
+    size_t operator()(const pair<T1,T2>&v)const{ 
+        size_t h=(size_t(v.first)<<sizeof(T1)*8)+size_t(v.second); 
+        h*=1231231557ull;
+        return h^(h>>sizeof(T1)*8); 
+    }
+};
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>hash</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

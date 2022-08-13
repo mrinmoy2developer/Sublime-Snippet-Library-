@@ -1,0 +1,295 @@
+<snippet>
+	<content><![CDATA[
+
+#pragma GCC optimize("Ofast")
+#pragma GCC target("sse,sse2,sse3,ssse3,sse4,popcnt,abm,mmx,avx,avx2,fma")
+#pragma GCC optimize("unroll-loops")
+#include<ext/pb_ds/assoc_container.hpp>
+#include<ext/pb_ds/tree_policy.hpp>
+#include "bits/stdc++.h" 
+
+using namespace std;
+using namespace __gnu_pbds;
+
+typedef tree<int,null_type,less<int>,rb_tree_tag,tree_order_statistics_node_update> os;
+typedef long long ll;
+typedef short unsigned su;
+typedef unsigned long long ull;
+typedef long double ld;
+typedef pair<int,int> pii;
+typedef pair<ll,ll> pll;
+typedef pair<double,double> pdd;
+typedef vector<ll> vll;
+typedef vector<int> vii;
+typedef vector<vii> vvii;
+typedef vector<vll> vvll;
+typedef vector<pll> vpll;
+typedef vector<pii> vpii;
+typedef vector<vpll> vvpll;
+
+const ll MOD = 998244353;
+const double eps = 1e-12;
+#define vv vector
+#define pq priority_queue
+#define us unordered_set 
+#define ums unordered_multiset
+#define um unordered_map 
+#define umm unordered_multimap
+#define f(i,a,b) for(reg ll i=a;i<b;i++)
+#define fb(i,a,b) for(reg ll i=a;i>=b;i--)
+#define fi(i,s) for(auto i=s.begin();i!=s.end();i++)
+#define fv(i,s) for( auto& i : s)
+#define fp(k,v,s) for( auto& [k,v] : s)
+#define ft(u,v,d,s) for( auto& [u,v,d] : s)
+#define ln "\n"
+#define dbg(x) cout<<#x<<" = "<<x<<ln
+#define sp(x) <<fixed<<setprecision(x)
+#define mp make_pair
+#define mt make_tuple
+#define ts tuple_size
+#define pb push_back
+#define reg register
+#define ff first
+#define ss second
+#define in insert
+#define ig ignore
+#define popcount(x) __builtin_popcountll(x)
+#define czr(x) __builtin_ctzll(x)
+#define czl(x) __builtin_clzll(x)
+#define pow2(n) (n & (~(n - 1)))
+#define clrp(x,i) (x & (1 << i)-1)
+#define clrs(x,i) (x & ~((1 <<i)-1))
+#define isp2(x) (x && !(x & x-1))
+#define LSB(i) ((i) & -(i))
+#define INF 2e18
+#define fast_cin() ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL)
+#define SET(name) freopen(name".txt", "r", stdin), freopen(name".txt", "w", stdout)
+#define all(x) (x).begin(), (x).end()
+#define sz(x) ((ll)(x).size())
+#define rez(s,n) s.clear();s.resize(n)
+#define eqr(s,x) equal_range(all(s),x)
+#define isin(s,x) (s.find(x)!=s.end())
+#define ad(i,k) advance(i,k)
+#define gc getchar()
+#define mat vv<vv<ld>> 
+template<class T=int>
+inline T read(){
+    T c=gc,t=1,n=0;
+    if(c=='-'){t=-1,c=gc;}
+    while(isdigit(c)){n=n*10+c-'0',c=gc;}
+    return n*t;
+}
+template<class T=int>
+inline void write(T x){
+    if (x<0){
+        putchar('-');
+        x*=-1;
+    }
+    if(x<10)putchar(x+'0');
+    else{
+        write(x/10);
+        putchar(x%10+'0');
+    }
+}
+template<class T=int>
+inline void print(T x,char c='\n'){
+    write(x);
+    putchar(c);
+}
+int LCSubStr(string X,string Y){
+    int m = X.size();
+    int n = Y.size();
+    int LCSuff[m + 1][n + 1];
+    int result = 0; 
+    for (int i = 0; i <= m; i++)
+    {
+        for (int j = 0; j <= n; j++)
+        {
+            if (i == 0 || j == 0)
+                LCSuff[i][j] = 0;
+
+            else if (X[i - 1] == Y[j - 1]) {
+                LCSuff[i][j] = LCSuff[i - 1][j - 1] + 1;
+                result = max(result, LCSuff[i][j]);
+            }
+            else
+                LCSuff[i][j] = 0;
+        }
+    }
+    return result;
+}
+int getSum(int BITree[], int index)
+{
+    int sum = 0;
+    while (index > 0)
+    {
+        sum += BITree[index];
+        index -= index & (-index);
+    }
+    return sum;
+}
+void updateBIT(int BITree[], int n, int index, int val)
+{
+    while (index <= n)
+    {
+       BITree[index] += val;
+       index += index & (-index);
+    }
+}
+void convert(int arr[], int n){
+    int temp[n];
+    for (int i=0; i<n; i++)
+        temp[i] = arr[i];
+    sort(temp, temp+n);
+    for (int i=0; i<n; i++)
+    {
+        arr[i] = lower_bound(temp, temp+n, arr[i]) - temp + 1;
+    }
+}
+int Inv(int arr[], int n)
+{
+    int invcount = 0;
+    convert(arr, n);
+    int BIT[n+1];
+    for (int i=1; i<=n; i++)
+        BIT[i] = 0;
+    for (int i=n-1; i>=0; i--)
+    {
+        invcount += getSum(BIT, arr[i]-1);
+
+        updateBIT(BIT, n, arr[i], 1);
+    }
+    return invcount;
+}
+ll moduloMultiplication(ll a, ll b,ll mod){
+    ll res = 0;
+    a %= mod;
+    while (b) {
+        if (b & 1)
+            res = (res + a) % mod;
+        a = (2 * a) % mod;
+        b >>= 1;
+    }
+    return res;
+}
+ll gcdExtended(ll a, ll b,ll* x,ll* y){
+    if (a == 0) {
+        *x = 0, *y = 1;
+        return b;
+    }
+    ll x1, y1;
+    ll gcd = gcdExtended(b % a, a, &x1, &y1);
+    *x = y1 - (b / a) * x1;
+    *y = x1;
+    return gcd;
+}
+ll modInverse(ll b, ll m){
+    ll x, y; 
+    ll g = gcdExtended(b, m, &x, &y);
+    if (g != 1)
+        return -1;
+    return (x % m + m) % m;
+}
+ll modDivide(ll a, ll b,ll m){
+    a = a % m;
+    ll inv = modInverse(b, m);
+    if (inv == -1)
+        return 0;
+    else
+        return (inv * a) % m;
+}
+ll C(ll n, ll r, ll p){
+    if (r > n)
+        return 0;
+    if (r > n - r)
+        r = n - r;
+    ll x = 1;
+    for (ll i = 1; i <= r; i++) {
+        x = moduloMultiplication(x, (n + 1 - i), p);
+        x = modDivide(x, i, p);
+    }
+    return x;
+}
+ll fpow(ll b, ll p){
+  if (p==0)return 1;
+  ll t=fpow(b,p/2);
+  t=(t*t)%MOD;
+  if (p%2==1)t*=b;
+  return t%MOD;
+}
+int len(ll n){
+    int l=0;
+    while(n>0)l++,n/=10;
+    return l;
+}
+template<class T>
+ostream& operator<<(ostream& out,vv<T>&v){
+    fv(i,v)out<<i<<" ";
+    out<<ln;
+    return out;
+}
+template<class T>
+istream& operator>>(istream& inp,vv<T>&v){
+    if(sz(v))fv(i,v)inp>>i;
+    else{
+        T t;
+        string l;
+        inp>>t;
+        v.pb(t);
+        getline(inp,l);
+        istringstream iss(l);
+        while(iss>>t)v.pb(t);
+    }
+    return inp;
+}
+ostream& operator<<(ostream& out,mat A){
+    out<<fixed<<setprecision(4);
+    fv(i,A){
+        out<<i;
+        out<<ln;
+    }
+    out<<flush;
+    return out;
+}
+template<class T>
+ll MSB(ll n){
+    int p=0;
+    while(n)n>>=1,p++;
+    return 1<<(p-1);phi
+}
+void solve(){
+    short n;
+    ll s=0;
+    cin>>n;
+    int a[n];
+    f(i,0,n){cin>>a[i];s+=a[i];}
+    f(k,0,n){
+        int l=n-k;
+        if(s%l)continue;
+        ll h=s/l,t=0;
+        f(i,0,n){
+            t+=a[i];
+            if(t==h)t=0;
+            else if(t>h)break;
+        }
+        if(!t){cout<<k<<" "<<ln;return;}
+    }
+}
+int main(){
+    #ifndef ONLINE_JUDGE  
+        freopen("input.txt", "r", stdin);
+        freopen("output.txt", "w", stdout);
+    #endif
+    fast_cin();
+    // init();
+    int u;
+    cin>>u;
+    while(u--)
+    solve();
+    return 0;
+}]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>start</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

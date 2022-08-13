@@ -1,0 +1,17 @@
+<snippet>
+	<content><![CDATA[
+ll MSA(vll a,int&l,int&r){
+    ll ans=a[0],s=0,p=-1;l=r=0;
+    f(i,0,sz(a)){
+        s+=a[i];
+        if(s>ans)ans=s,l=p+1,r=i;
+        if(s<0)s=0,p=i;
+    }
+    return ans;
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>msa</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

@@ -1,0 +1,14 @@
+<snippet>
+	<content><![CDATA[
+#define L int(1e7+5)
+bool p[L];
+void init(){
+    memset(p+2,1,L-2);
+    for(ll i=2;i*i<=L;i++)if(p[i])for(ll j=i*i;j<=L;j+=i)p[j]=0;
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>primes</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

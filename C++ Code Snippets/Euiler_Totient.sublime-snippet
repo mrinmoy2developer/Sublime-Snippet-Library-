@@ -1,0 +1,22 @@
+<snippet>
+	<content><![CDATA[
+		
+#define MAX int(4e6+10)
+ll s[MAX];
+void init(){
+    ll p[MAX]={0,1};
+	f(i,2,MAX)if(!p[i]){
+		p[i]=i-1;
+		for (ll j=(i<<1);j<MAX;j+=i){
+			if(!p[j])p[j]=j;
+			p[j]=(p[j]/i)*(i-1);
+		}
+	}
+	f(i,1,MAX)for(ll j=3;i*j<MAX;j+=2)s[i*j]+=i*p[j]/2;
+}
+]]></content>dghdg
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>phi</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

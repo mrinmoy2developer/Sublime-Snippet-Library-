@@ -1,0 +1,46 @@
+<snippet>
+	<content><![CDATA[
+template<int M=104857601>
+struct MINT{
+    int v;
+    MINT():v(0){}
+    MINT(ll n){
+        v=(-M<=n&&n<M)?n:n% M;
+        if(v<0)v+=M;
+    }
+    friend istream& operator>>(istream &inp,MINT &a){ 
+        ll t;
+        inp>>t;
+        a=MINT(t);
+        return inp; 
+    }
+    friend ostream& operator<<(ostream &out,const MINT &a){return out<<a.v;}
+    friend bool operator==(const MINT &a,const MINT &b){return a.v==b.v;}
+    friend bool operator!=(const MINT &a,const MINT &b){return a.v!=b.v;}
+    friend MINT pw(MINT a,ll b){
+        MINT r=1;
+        while(b){
+            if(b & 1)r*=a;
+            b>>=1;a*=a;
+        }
+        return r;
+    }
+    friend MINT inv(const MINT a){return pw(a,M-2);}
+    MINT operator-()const{return MINT(-v);}
+    MINT& operator+=(const MINT m){if((v+=m.v)>=M)v-=M;return *this;}
+    MINT& operator-=(const MINT m){if((v-=m.v)<0)v+=M;return *this;}
+    MINT& operator*=(const MINT m){v=(ll)v*m.v%M;return *this;}
+    MINT& operator/=(const MINT m){*this*=inv(m);return *this;}
+    friend MINT operator+(MINT a,MINT b){a+=b;return a;}
+    friend MINT operator-(MINT a,MINT b){a-=b;return a;}
+    friend MINT operator*(MINT a,MINT b){a*=b;return a;}
+    friend MINT operator/(MINT a,MINT b){a/=b;return a;}
+    operator int32_t()const{return v;}
+    operator int64_t()const{return v;}
+};
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>MINT_Class</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

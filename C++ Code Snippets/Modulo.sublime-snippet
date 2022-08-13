@@ -1,0 +1,68 @@
+<snippet>
+	<content><![CDATA[
+ll mpdt(ll a,ll b,ll mod=MOD){
+    ll res=0;
+    a%=mod;
+    while(b){
+        if(b&1)res=(res + a)%mod;
+        a=(2*a)%mod;
+        b>>=1;
+    }
+    return res;
+}
+ll egcd(ll a, ll b,ll* x,ll* y){
+    if(a==0){
+        *x=0,*y=1;
+        return b;
+    }
+    ll x1,y1;
+    ll gcd=egcd(b%a,a,&x1,&y1);
+    *x=y1-(b/a)*x1;
+    *y=x1;
+    return gcd;
+}
+ll modi(ll b, ll m=MOD){
+    ll x,y; 
+    ll g=egcd(b,m,&x,&y);
+    if (g!=1)return -1;
+    return (x % m + m) % m;
+}
+ll mdiv(ll a, ll b,ll m=MOD){
+    a=a%m;
+    ll inv=mdiv(b,m);
+    if(inv==-1)return 0;
+    else return(inv*a)%m;
+}
+ll C(ll n,ll r,ll p){
+    if(r>n)return 0;
+    if(r>n-r)r=n-r;
+    ll x=1;
+    f(i,1,r+1){
+        x=mpdt(x, (n + 1 - i), p);
+        x=mdiv(x,i,p);
+    }
+    return x;
+}
+ll fpow(ll b, ll p,ll m=MOD){
+  if (p==0)return 1;
+  ll t=fpow(b,p/2);
+  t=(t*t)%m;
+  if (p%2==1)t*=b;
+  return t%m;
+}
+ll fpow2(ll p){
+  if (p==0)return 1;
+  ll t=fpow2(p>>1);
+  t=(t*t)%MOD;
+  if (p&1)t<<1;
+  return t%MOD;
+}
+ll fmod(const ll x,const ll M=MOD){
+    return x>=M?x-M:x;
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>modulo</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

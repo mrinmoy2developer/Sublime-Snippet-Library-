@@ -1,0 +1,21 @@
+<snippet>
+	<content><![CDATA[
+
+ll ncr(ll n,ll r){
+    if(n<r)return 0;
+    if(r>n/2)r=n-r;
+    if(!r)return 1;
+    ll p=1,k=1;
+    while(r){
+        p*=n--,k*=r--;
+        ll g=gcd(p,k);
+        p/=g,k/=g;
+    }
+    return p/k;
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>ncr</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

@@ -1,0 +1,54 @@
+<snippet>
+	<content><![CDATA[
+ll n,x;
+vvll a;
+vv<bool>vst;
+queue<int>q;
+vll d,p;
+void init(){
+    rez(a,n);
+    rez(d,n);
+    rez(p,n);
+    rez(vst,n);
+}
+void bfs(ll r){
+    q.push(r);
+    vst[r]=1;
+    p[r]=-1;
+    while(!q.empty()){
+        int v=q.front();
+        q.pop();
+        fv(u,a[v])if(!vst[u]){
+                vst[u]=1;
+                q.push(u);
+                d[u]=d[v]+1;
+                p[u]=v;
+            }
+    }
+}
+void show(){
+    f(i,0,n){
+        cout<<i+1<<":";
+        fv(j,a[i])cout<<j+1<<" ";
+        cout<<ln;
+    }
+}
+void solve(){
+    cin>>n;
+    init();
+    f(i,0,n-1){
+        ll u,v;
+        cin>>u>>v;
+        u--,v--;
+        a[u].pb(v);
+        a[v].pb(u);
+    }
+    bfs(0);
+    cout<<"d: "<<d<<ln<<"p: "<<p<<ln;
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>bfs</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

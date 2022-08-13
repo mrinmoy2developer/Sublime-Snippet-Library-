@@ -1,0 +1,16 @@
+<snippet>
+	<content><![CDATA[
+bool ok(){
+
+}
+ll bs(ll z){//00000000000001111111111111111...
+    ll x=-1;
+    for(reg ll b=z;b>=1;b/=2)while(!ok(x+b))x+=b;
+    return x+1;
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>binary</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

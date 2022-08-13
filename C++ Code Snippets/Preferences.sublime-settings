@@ -1,0 +1,10 @@
+{
+	"font_size": 12,
+	"ignored_packages":
+	[
+		"Vintage",
+	],
+	"theme": "Default.sublime-theme",
+	"color_scheme": "Packages/Color Scheme - Default/Monokai.sublime-color-scheme",
+	"hardware_acceleration": "opengl",
+}

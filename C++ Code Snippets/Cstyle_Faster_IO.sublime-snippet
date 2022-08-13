@@ -1,0 +1,32 @@
+<snippet>
+	<content><![CDATA[
+template<class T=int>
+inline T read(){
+    T c=gc(),t=1,n=0;
+    if(c=='-'){t=-1,c=gc();}
+    while(isdigit(c)){n=n*10+c-'0',c=gc();}
+    return n*t;
+}
+template<class T=int>
+inline void write(T x){
+    if (x<0){
+        pc('-');
+        x*=-1;
+    }
+    if(x<10)pc(x+'0');
+    else{
+        write(x/10);
+        pc(x%10+'0');
+    }
+}
+template<class T=int>
+inline void print(T x,char c='\n'){
+    write(x);
+    pc(c);
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>fasterio</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>

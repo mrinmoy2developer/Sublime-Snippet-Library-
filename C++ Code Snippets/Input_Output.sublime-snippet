@@ -1,0 +1,48 @@
+<snippet>
+	<content><![CDATA[
+template<class T>
+ostream& operator<<(ostream& out,vv<T>&v){
+    fv(i,v)out<<i<<" ";
+    out<<ln;
+    return out;
+}
+template<class T>
+istream& operator>>(istream& inp,vv<T>&v){
+    if(sz(v))fv(i,v)inp>>i;
+    else{
+        T t;
+        string l;
+        inp>>t;
+        v.pb(t);
+        getline(inp,l);
+        istringstream iss(l);
+        while(iss>>t)v.pb(t);
+    }
+    return inp;
+}
+template<class T>
+istream& operator>>(istream& inp,vv<vv<T>>&A){
+    fv(i,A)inp>>i;
+    return inp;
+}
+template<class A,class B>
+ostream& operator<<(ostream& out,pair<A,B>p){
+    out<<"("<<p.ff<<","<<p.ss<<")";
+    return out;
+}
+template<class A,class B>
+istream& operator>>(istream& inp,pair<A,B>&p){
+    inp>>p.ff>>p.ss;
+    return inp;
+}
+template<class T>
+ostream& operator<<(ostream& out,vv<vv<T>>A){
+    fv(i,A)out<<i;
+    return out;
+}
+]]></content>
+	<!-- Optional: Set a tabTrigger to define how to trigger the snippet -->
+	<tabTrigger>C++IO</tabTrigger>
+	<!-- Optional: Set a scope to limit where the snippet will trigger -->
+	<!-- <scope>source.python</scope> -->
+</snippet>
