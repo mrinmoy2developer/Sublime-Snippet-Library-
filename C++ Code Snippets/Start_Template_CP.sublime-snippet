@@ -41,6 +41,7 @@ const double eps = 1e-12;
 #define fv(i,s) for( auto& i : s)
 #define fp(k,v,s) for( auto& [k,v] : s)
 #define ft(u,v,d,s) for( auto& [u,v,d] : s)
+#define fz(i,j,u,v) for(auto [it,jt,i,j]=tuple{u.begin(),v.begin(),*u.begin(),*v.begin()};it!=u.end();it++,jt++,i=*it,j=*jt)
 #define ln "\n"
 #define dbg(x) cout<<#x<<" = "<<x<<ln
 #define sp(x) <<fixed<<setprecision(x)
@@ -48,6 +49,7 @@ const double eps = 1e-12;
 #define mt make_tuple
 #define ts tuple_size
 #define pb push_back
+#define eb emplace_back
 #define reg register
 #define ff first
 #define ss second
